@@ -2,7 +2,8 @@
   <div>
     <p>{{ label }}</p>
     <input
-        v-bind="$attrs"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
         :type="type"
         required
     />
@@ -21,8 +22,12 @@ export default {
     type: {
       type: String,
       default: 'text'
+    },
+    modelValue :{
+      type: String,
+      default: '',
     }
-  }
+  },
 }
 </script>
 

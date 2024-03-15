@@ -1,5 +1,5 @@
 <template>
-  <FormInput :label="label" type="password" required/>
+  <FormInput :label="label" type="repeat-password"/>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
     label: {
       type: String,
       default: ''
-    }
+    },
   },
   components: {
     FormInput
