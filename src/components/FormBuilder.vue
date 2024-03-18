@@ -29,7 +29,8 @@
           <form-repeat-password 
             v-if="item.name === 'repeat-pass'" 
             :label="item.label" 
-            v-model="formData[name][item.name]" 
+            v-model="check[name][item.name]" 
+            :pattern="formData[name][item.additional.parent]"
           />
         </div>
       </div>
@@ -42,7 +43,6 @@
 <script>
 
 import dataUsers from "@/json/form-config.json";
-import FormItem from "@/components/form-items/FormItem.vue";
 import FormInput from "@/components/form-items/FormInput.vue";
 import FormSelect from "@/components/form-items/FormSelect.vue";
 import FormRadio from "@/components/form-items/FormRadio.vue";
@@ -56,30 +56,37 @@ export default {
       data: dataUsers,
       formData: {
       },
+      check:{},
       isValid: false,
       pass: '',
     }
   },
   methods: {
     onSubmit() {
-      console.log("Form data:", this.formData);
-      
+      fetch('https://httpbin.org/post', {
+          method: 'POST', 
+          body: JSON.stringify(this.formData)
+        })
+      .then ((response) => response.json())
+      .then ((data) => {
+        alert(data.data)
+      })
     },
     createData(){
       for (let a in this.data){
         this.formData[a] = {
           name: '',
-          gender: '',
-          age: '',
           pass: '',
         };
+        this.check[a] = {
+}
       }
-    }
+    },
   },
   beforeMount(){
     this.createData();
   },
-  components: {FormPassword, FormRepeatPassword, FormRadio, FormSelect, FormInput, FormItem}
+  components: {FormPassword, FormRepeatPassword, FormRadio, FormSelect, FormInput,}
 }
 </script>
 

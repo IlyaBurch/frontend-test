@@ -6,7 +6,13 @@
         v-for="option in options"
         :key="option.value"
     >
-      <input required type="radio" name="radio" :id="option.value" :value="option.value" :checked="option.selected" />
+      <input 
+        required 
+        type="radio" name="radio" 
+        :id="option.value" 
+        :value="option.value" 
+        :checked="option.selected" 
+        @change="$emit('update:modelValue', $event.target.value)"/>
       <label :for="option.value">{{ option.text }}</label>
     </div>
   </fieldset>
@@ -15,7 +21,11 @@
 <script>
 export default {
   name: "FormRadio",
-
+  data(){
+    return{
+      // value = this.option.value
+    }
+  },
   props: {
     label: {
       type: String,

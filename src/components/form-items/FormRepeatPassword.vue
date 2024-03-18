@@ -1,6 +1,5 @@
 <template>
-  <FormInput :label="label" type="password" required/>
-  {{ pass }}
+  <FormInput :label="label" type="password" required :pattern />
 </template>
 
 <script>
@@ -22,6 +21,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    pattern:{
+      type: String,
+      required: true,
+    }
 
   },
   components: {

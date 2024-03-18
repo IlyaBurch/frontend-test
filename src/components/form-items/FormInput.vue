@@ -6,6 +6,7 @@
         @input="$emit('update:modelValue', $event.target.value)"
         :type="type"
         required
+        :pattern
     />
   </div>
 </template>
@@ -26,11 +27,16 @@ export default {
     modelValue :{
       type: String,
       default: '',
+    },
+    pattern:{
+      type: String
     }
   },
 }
 </script>
 
 <style scoped>
-
+  input:invalid{
+    background: red;
+  }
 </style>
