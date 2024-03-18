@@ -1,32 +1,37 @@
 <template>
-    <form @submit.prevent="onSubmit">
-      <div class="form-builder" v-for="(field, name) in data" >
-        <h3>{{ field.name }}</h3>
+    <form @submit.prevent="onSubmit" class="form">
+      <div class="form--item" v-for="(field, name) in data">
+        <h3 class="item--name">{{ field.name }}</h3>
         
-        <div v-for="item in field.items">
+        <div v-for="item in field.items" class="item--body">
           <form-input 
+            class="input item--text-input"
             v-if="item.name === 'name'" 
             :label="item.label" 
             v-model="formData[name][item.name]"
           />
           <form-select 
+            class="input item--select"
             v-if="item.name === 'gender'" 
             :label="item.label" 
             :options="item.additional.options"
             v-model="formData[name][item.name]" 
           />
           <form-radio 
+            class="input item--radio"
             v-if="item.name === 'age'" 
             :label="item.label" 
             :options="item.additional.options"
             v-model="formData[name][item.name]" 
           />
           <form-password 
+            class="input item--password"
             v-if="item.name === 'pass'" 
             :label="item.label" 
             v-model="formData[name][item.name]" 
           />
           <form-repeat-password 
+            class="input item--password"
             v-if="item.name === 'repeat-pass'" 
             :label="item.label" 
             v-model="check[name][item.name]" 
@@ -35,8 +40,8 @@
         </div>
       </div>
 
-      <button type="submit">Отправить</button>
-      <button type="reset">Стереть</button>
+      <button class="button form--submit-button" type="submit">Отправить</button>
+      <button class="button form--submit-button" type="reset">Стереть</button>
     </form>
 </template>
 
@@ -54,11 +59,8 @@ export default {
   data(){
     return {
       data: dataUsers,
-      formData: {
-      },
+      formData: {},
       check:{},
-      isValid: false,
-      pass: '',
     }
   },
   methods: {
@@ -78,8 +80,7 @@ export default {
           name: '',
           pass: '',
         };
-        this.check[a] = {
-}
+        this.check[a] = {}
       }
     },
   },
@@ -91,5 +92,14 @@ export default {
 </script>
 
 <style scoped>
-
+.form{
+  width: 300px;
+}
+.button{
+  border: none;
+  background: none;
+}
+.input{
+  border: 20px;
+}
 </style>
