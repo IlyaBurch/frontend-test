@@ -1,15 +1,37 @@
 <template>
-    <form @submit.prevent="onSubmit" >
+    <form @submit.prevent="onSubmit">
       <div class="form-builder" v-for="(field, name) in data" >
         <h3>{{ field.name }}</h3>
         
         <div v-for="item in field.items">
-          <form-input v-if="item.name === 'name'" :label="item.label" v-model="formData[name][item.name]"/>
-          <form-select v-if="item.name === 'gender'" :label="item.label" :options="item.additional.options" />
-          <form-radio v-if="item.name === 'age'" :label="item.label" :options="item.additional.options" />
-          <form-password v-if="item.name === 'pass'" :label="item.label" v-model="formData[name][item.name]" />
-          <form-repeat-password v-if="item.name === 'repeat-pass'" :label="item.label" v-model="check" v-on=""/>
-          </div>
+          <form-input 
+            v-if="item.name === 'name'" 
+            :label="item.label" 
+            v-model="formData[name][item.name]"
+          />
+          <form-select 
+            v-if="item.name === 'gender'" 
+            :label="item.label" 
+            :options="item.additional.options"
+            v-model="formData[name][item.name]" 
+          />
+          <form-radio 
+            v-if="item.name === 'age'" 
+            :label="item.label" 
+            :options="item.additional.options"
+            v-model="formData[name][item.name]" 
+          />
+          <form-password 
+            v-if="item.name === 'pass'" 
+            :label="item.label" 
+            v-model="formData[name][item.name]" 
+          />
+          <form-repeat-password 
+            v-if="item.name === 'repeat-pass'" 
+            :label="item.label" 
+            v-model="formData[name][item.name]" 
+          />
+        </div>
       </div>
 
       <button type="submit">Отправить</button>
@@ -34,7 +56,8 @@ export default {
       data: dataUsers,
       formData: {
       },
-      check:'',
+      isValid: false,
+      pass: '',
     }
   },
   methods: {

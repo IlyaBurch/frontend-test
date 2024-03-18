@@ -1,17 +1,28 @@
 <template>
-  <FormInput :label="label" type="repeat-password"/>
+  <FormInput :label="label" type="password" required/>
+  {{ pass }}
 </template>
 
 <script>
 import FormInput from "@/components/form-items/FormInput.vue";
 
 export default {
-  name: "FormPassword",
+  name: "FormRepeatPassword",
+  data(){
+    return{
+      isValid: false,
+    }
+  },
   props: {
     label: {
       type: String,
       default: ''
     },
+    check:{
+      type: Boolean,
+      default: false,
+    },
+
   },
   components: {
     FormInput
