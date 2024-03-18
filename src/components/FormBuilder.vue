@@ -1,48 +1,51 @@
 <template>
-    <form @submit.prevent="onSubmit" class="form">
-      <div class="form--item" v-for="(field, name) in data">
-        <h3 class="item--name">{{ field.name }}</h3>
-        
-        <div v-for="item in field.items" class="item--body">
-          <form-input 
-            class="input item--text-input"
-            v-if="item.name === 'name'" 
-            :label="item.label" 
-            v-model="formData[name][item.name]"
-          />
-          <form-select 
-            class="input item--select"
-            v-if="item.name === 'gender'" 
-            :label="item.label" 
-            :options="item.additional.options"
-            v-model="formData[name][item.name]" 
-          />
-          <form-radio 
-            class="input item--radio"
-            v-if="item.name === 'age'" 
-            :label="item.label" 
-            :options="item.additional.options"
-            v-model="formData[name][item.name]" 
-          />
-          <form-password 
-            class="input item--password"
-            v-if="item.name === 'pass'" 
-            :label="item.label" 
-            v-model="formData[name][item.name]" 
-          />
-          <form-repeat-password 
-            class="input item--password"
-            v-if="item.name === 'repeat-pass'" 
-            :label="item.label" 
-            v-model="check[name][item.name]" 
-            :pattern="formData[name][item.additional.parent]"
-          />
+    <div class="wrapper">
+      <form @submit.prevent="onSubmit" class="form form__paddings">
+        <div class="form--item" v-for="(field, name) in data">
+          <h3 class="item--name">{{ field.name }}</h3>
+          <div v-for="item in field.items" class="item--body">
+            <form-input
+              class="input item--text-input"
+              v-if="item.name === 'name'"
+              :label="item.label"
+              v-model="formData[name][item.name]"
+            />
+            <form-select
+              class="input item--select"
+              v-if="item.name === 'gender'"
+              :label="item.label"
+              :options="item.additional.options"
+              v-model="formData[name][item.name]"
+            />
+            <form-radio
+              class="input item--radio"
+              v-if="item.name === 'age'"
+              :label="item.label"
+              :name="name"
+              :options="item.additional.options"
+              v-model="formData[name][item.name]"
+            />
+            <form-password
+              class="input item--password"
+              v-if="item.name === 'pass'"
+              :label="item.label"
+              v-model="formData[name][item.name]"
+            />
+            <form-repeat-password
+              class="input item--password"
+              v-if="item.name === 'repeat-pass'"
+              :label="item.label"
+              v-model="check[name][item.name]"
+              :pattern="formData[name][item.additional.parent]"
+            />
+          </div>
         </div>
-      </div>
-
-      <button class="button form--submit-button" type="submit">Отправить</button>
-      <button class="button form--submit-button" type="reset">Стереть</button>
-    </form>
+        <div class="form--submit-buttons">
+          <button class="button submit-button" type="submit">Отправить</button>
+          <button class="button submit-button" type="reset">Стереть</button>
+        </div>
+      </form>
+    </div>
 </template>
 
 <script>
@@ -92,14 +95,45 @@ export default {
 </script>
 
 <style scoped>
-.form{
-  width: 300px;
-}
 .button{
   border: none;
   background: none;
 }
+
+.wrapper{
+  background-color: #333333;
+  display: grid;
+  place-items: center;
+  color: #333333;
+}
+
+.form{
+  width: 300px;
+  background-color: #fcfaf9;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 50px  black;
+}
+
+.form--submit-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+.submit-button{
+  background: #48E5C2;
+  color: #FCFAF9;
+  width: 120px;
+  height: 50px;
+  border-radius: 16px;
+}
+
+.form__paddings{
+  margin: 50px 0 50px 0;
+}
 .input{
-  border: 20px;
+  padding: 5px;
+}
+.item--name{
+  padding: 20px;
 }
 </style>

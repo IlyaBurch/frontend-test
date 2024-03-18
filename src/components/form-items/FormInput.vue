@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <p>{{ label }}</p>
-    <input
+  <div class="input-wrapper">
+    <p class="input--label">{{ label }}</p>
+    <input class="input--text"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         :type="type"
         required
         :pattern
     />
+    <span class="input--validity"></span>
   </div>
 </template>
 
@@ -37,6 +38,15 @@ export default {
 
 <style scoped>
   input:invalid{
-    background: red;
+    border: 2px solid red;
   }
+  input:invalid + .input--validity::before {
+  content: 'Некорректные данные';
+  color: red;
+}
+  .input--text{
+  border: 2px solid #F3D3BD;
+  border-radius: 8px;
+  height: 35px;
+}
 </style>

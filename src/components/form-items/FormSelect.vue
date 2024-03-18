@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>{{ label }}</p>
-    <select>
+    <select class="select">
       <option
         v-for="option in options"
         :key="option.value"
@@ -32,5 +32,9 @@ export default {
 </script>
 
 <style scoped>
-
+.select{
+  background-color: #fcfaf9;
+  border: 2px solid #F3D3BD;
+  border-radius: 8px;
+}
 </style>
